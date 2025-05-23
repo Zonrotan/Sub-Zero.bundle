@@ -5,6 +5,10 @@ What i've fixed/updated:
 *"Get My Logs"-function now works from interface (via Kitana)
 
 
+Original repo README.MD now follows
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 # Sub-Zero for Plex
 [![](https://img.shields.io/github/release/pannal/Sub-Zero.bundle.svg?style=flat&label=stable)](https://github.com/pannal/Sub-Zero.bundle/releases/latest) 
 [![master](https://img.shields.io/badge/master-stable-green.svg?maxAge=2592000)]()
