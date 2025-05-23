@@ -5,7 +5,7 @@ What i've fixed/updated:
 *"Get My Logs"-function now works from interface (via Kitana)
 
 
-Original repo README.MD now follows
+Original repo README.MD now follows:
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
