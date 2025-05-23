@@ -2,7 +2,8 @@ Hello! This is my "fork" of Sub-Zero, where i try to maintain/update it to corre
 Everything else but my small changes should be as the original.
 
 What i've fixed/updated:
-*"Get My Logs"-function now works from interface (via Kitana)
+
+2025-05-23: "Get My Logs"-function now works from interface (via Kitana)
 
 
 Original repo README.MD now follows:
