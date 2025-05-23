@@ -353,7 +353,7 @@ def GetLogsLink():
         get_external_ip = False
 
     if get_external_ip or "plex.tv" in link_base:
-        ip = Core.networking.http_request("http://www.plexapp.com/ip.php", cacheTime=7200).content.strip()
+        ip = Core.networking.http_request("https://ifconfig.me/ip", cacheTime=7200).content.strip()
         link_base = "https://%s:32400" % ip
         Log.Debug("Using ip-based fallback link_base")
 
