@@ -1,3 +1,10 @@
+Hello! This is my "fork" of Sub-Zero, where i try to maintain/update it to correctly function for Plex in current-year.
+Everything else but my small changes should be as the original.
+
+What i've fixed/updated:
+*"Get My Logs"-function now works from interface (via Kitana)
+
+
 # Sub-Zero for Plex
 [![](https://img.shields.io/github/release/pannal/Sub-Zero.bundle.svg?style=flat&label=stable)](https://github.com/pannal/Sub-Zero.bundle/releases/latest) 
 [![master](https://img.shields.io/badge/master-stable-green.svg?maxAge=2592000)]()
