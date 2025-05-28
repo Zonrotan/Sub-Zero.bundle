@@ -554,26 +554,43 @@ class OpenSubtitlesComProvider(ProviderRetryMixin, Provider):
 
 
 def log_request_response(response, non_standard=True):
-    redacted_request_headers = response.request.headers
-    if 'Authorization' in redacted_request_headers and isinstance(redacted_request_headers['Authorization'], str):
-        redacted_request_headers['Authorization'] = redacted_request_headers['Authorization'][:-8]+8*'x'
+    try:
+        redacted_request_headers = response.request.headers.copy()
+        if 'Authorization' in redacted_request_headers and isinstance(redacted_request_headers['Authorization'], str):
+            redacted_request_headers['Authorization'] = redacted_request_headers['Authorization'][:-8]+8*'x'
+    except Exception as e:
+        redacted_request_headers = 'Could not read headers: %s' % e
 
-    redacted_request_body = json.loads(response.request.body)
-    if 'password' in redacted_request_body:
-        redacted_request_body['password'] = 'redacted'
+    try:
+        # Try to read body as JSON, if not possible, log as text
+        body = response.request.body
+        try:
+            redacted_request_body = json.loads(body)
+            if isinstance(redacted_request_body, dict) and 'password' in redacted_request_body:
+                redacted_request_body['password'] = 'redacted'
+        except Exception:
+            redacted_request_body = str(body)
+    except Exception as e:
+        redacted_request_body = 'Could not read body: %s' % e
 
-    redacted_response_body = json.loads(response.text)
-    if 'token' in redacted_response_body and isinstance(redacted_response_body['token'], str):
-        redacted_response_body['token'] = redacted_response_body['token'][:-8] + 8 * 'x'
+    try:
+        # Try to read response as JSON, if not possible, log as text
+        text = response.text
+        try:
+            redacted_response_body = json.loads(text)
+            if isinstance(redacted_response_body, dict) and 'token' in redacted_response_body:
+                redacted_response_body['token'] = redacted_response_body['token'][:-8] + 8 * 'x'
+        except Exception:
+            redacted_response_body = str(text)
+    except Exception as e:
+        redacted_response_body = 'Could not read response: %s' % e
 
-    if non_standard:
-        logging.debug("opensubtitlescom returned a non standard response. Logging request/response for debugging "
-                      "purpose.")
-    else:
-        logging.debug("opensubtitlescom returned a standard response. Logging request/response for debugging purpose.")
-    logging.debug("Request URL: %s" % response.request.url)
-    logging.debug("Request Headers: %s" % redacted_request_headers)
-    logging.debug("Request Body: %s" % json.dumps(redacted_request_body))
-    logging.debug("Response Status Code: %s" % {response.status_code})
-    logging.debug("Response Headers: %s" % response.headers)
-    logging.debug("Response Body: %s" % json.dumps(redacted_response_body))
+    logger.debug("OpenSubtitles loggning:")
+    logger.debug("Request URL: %s", getattr(response.request, 'url', 'NO URL'))
+    logger.debug("Request Headers: %s", redacted_request_headers)
+    logger.debug("Request Body: %s", redacted_request_body)
+    logger.debug("Response Status Code: %s", getattr(response, 'status_code', 'NO CODE'))
+    logger.debug("Response Headers: %s", getattr(response, 'headers', 'NO HEADERS'))
+    logger.debug("Response Body: %s", redacted_response_body)
+
+
