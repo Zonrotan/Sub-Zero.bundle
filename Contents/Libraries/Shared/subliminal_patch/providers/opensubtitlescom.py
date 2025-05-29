@@ -585,7 +585,7 @@ def log_request_response(response, non_standard=True):
     except Exception as e:
         redacted_response_body = 'Could not read response: %s' % e
 
-    logger.debug("OpenSubtitles loggning:")
+    logger.debug("OpenSubtitles logging:")
     logger.debug("Request URL: %s", getattr(response.request, 'url', 'NO URL'))
     logger.debug("Request Headers: %s", redacted_request_headers)
     logger.debug("Request Body: %s", redacted_request_body)
