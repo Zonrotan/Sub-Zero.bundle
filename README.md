@@ -4,6 +4,7 @@ Everything else but my small changes should be as the original.
 What i've fixed/updated:
 
 2025-05-23: "Get My Logs"-function now works from interface (via Kitana)
+
 2025-05-29: Logging now supports OpenSubtitles.com HTML responses. Outputs HTML in the log (more readable than just getting "ValueError")
 
 
